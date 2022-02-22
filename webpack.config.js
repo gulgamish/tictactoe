@@ -18,6 +18,9 @@ module.exports = {
             },
         ]
     },
+    resolve: {
+        extensions: ['.js', '.jsx'],
+    },
     devServer: {
         static: './dist',
         port: 3000
