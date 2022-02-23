@@ -18,8 +18,10 @@
   "homepage": "https://github.com/gulgamish/tictactoe#readme",
   "dependencies": {
     "@chakra-ui/react": "^1.8.5",
+    "@xstate/react": "^2.0.0",
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "xstate": "^4.30.2"
   },
   "devDependencies": {
     "@babel/core": "^7.17.5",
