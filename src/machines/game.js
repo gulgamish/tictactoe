@@ -50,23 +50,27 @@ export default createMachine({
 }, {
     guards: {
         isValidMove: (context, event) => {
-            var squareValue = context.board[event.row][event.col];
-            var player = context.turn === Player.X ? Player.X : Player.O;
-            if (squareValue === 0 && squareValue !== player)
+            var coords = event.payload;
+            var squareValue = context.board[coords.row][coords.col];
+            if (squareValue === 0)
                 return true;
             return false;
         },
         isWinX: (context, event) => {
+            var board = context.board;
+            
+            return false;
 
         },
         isWinO: (context, event) => {
-
+            return false;
         }
     },
     actions: {
         putPiece: (context, event) => {
-            context.board[event.row][event.col] = context.turn;
-            context.turn = context.turn === Player.X ? Player.X : Player.O;;
+            var coords = event.payload;
+            context.board[coords.row][coords.col] = context.turn;
+            context.turn = context.turn === Player.X ? Player.O : Player.X;
         }
     },
 });
