@@ -26,8 +26,6 @@ const PlayerPiece = ({ player }) => {
 export default function Board() {
     const [states, send] = useMachine(GameMachine);
 
-    console.log(states.context)
-
     useEffect(() => {
         send({  type: "START_GAME" })
     }, [])
@@ -40,8 +38,10 @@ export default function Board() {
 
     return (
         <Grid gap="10px">
-            <h1>Board</h1>
-            <Flex justifyContent="center">
+            <Flex justifyContent="center" margin="10px">
+                <Text fontSize="30px" fontWeight="500">Board</Text>
+            </Flex>
+            <Flex justifyContent="center" gap="10px">
                 <Grid
                     templateColumns="1fr 1fr 1fr"
                     templateRows="1fr 1fr 1fr"
@@ -146,6 +146,28 @@ export default function Board() {
                         <Box width="10px" height="10px" backgroundColor={states.context.turn === Player.X ? "blue.400" : "blue.100"} borderRadius="50%" />
                         <Text>Player X</Text>
                     </Flex>
+                </Flex>
+            )}
+            {states.matches("winX") && (
+                <Flex justifyContent="center">
+                    <Text fontSize="18px" color="blue.500" fontWeight={500}>Player X wins!</Text>
+                </Flex>
+            )}
+            {states.matches("winO") && (
+                <Flex justifyContent="center">
+                    <Text fontSize="18px" color="green.500" fontWeight={500}>Player O wins!</Text>
+                </Flex>
+            )}
+            {(states.matches("winX") || states.matches("winO")) && (
+                <Flex justifyContent="center">
+                    <Button
+                        backgroundColor="blue.600"
+                        width="170px"
+                        _hover={{ backgroundColor: "blue.500" }}
+                        onClick={() => send({ type: "RESET" })}
+                    >
+                        RESET
+                    </Button>
                 </Flex>
             )}
         </Grid>
